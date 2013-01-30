@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 '''
 Created 2012-01-12 by Zhangmh - mail.charlesf@gmail.com
 Env Python 2.4.3
