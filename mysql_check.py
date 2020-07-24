@@ -3,7 +3,7 @@
 '''
 Created 2012-01-12 by Zhangmh - mail.charlesf@gmail.com
 Env Python 2.4.3
-Use 139 E-mail SMS alarm monitoring the DB the Slave synchronization
+Use 139 E-mail SMS alarm monitoring the DB the Subordinate synchronization
 '''
 import os
 import sys
@@ -29,16 +29,16 @@ def notice_email(FROM,TO,SUBJECT,TEXT):
                         server.sendmail(FROM, [TO], BODY)
 #mx1.mail.139.com by use 
 #dig @8.8.8.8 139.com mx
-def check_mysql_slave ():
+def check_mysql_subordinate ():
                 global sql
                 host=["10.0.0.23","10.0.0.24","10.0.0.25"]
-                ####23,24,25 是我的Slave DB IP
+                ####23,24,25 是我的Subordinate DB IP
                 for hosts in host:
                         try:
                                 conn=MySQLdb.connect(host=hosts,user="root",passwd="password",db="test",connect_timeout=3)
                                 cursor = conn.cursor(cursorclass = MySQLdb.cursors.DictCursor)
                                 cursor.execute("""
-                                show slave status;
+                                show subordinate status;
                                 """)
                                 sql=cursor.fetchall()
                                 cursor.close ()
@@ -48,12 +48,12 @@ def check_mysql_slave ():
                                 print hosts+" Mysql conn Faild!"
                         for i in sql:
               
-                                if i['Slave_IO_Running'] == "Yes" and i['Slave_SQL_Running'] == "Yes":
+                                if i['Subordinate_IO_Running'] == "Yes" and i['Subordinate_SQL_Running'] == "Yes":
 
-                                        print hosts+" DB slave Running OK"
+                                        print hosts+" DB subordinate Running OK"
 
                                 else:
-                                        notice_email(mymail,myphone,hosts,hosts+" Mysql Slave Stop....!")
+                                        notice_email(mymail,myphone,hosts,hosts+" Mysql Subordinate Stop....!")
 
 if __name__ == "__main__":
-        check_mysql_slave()
+        check_mysql_subordinate()
