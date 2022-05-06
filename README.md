@@ -6,4 +6,4 @@ mysql主从监控脚本
 */1 * * * * * /usr/bin/python mysql_check.py 
 ``` 
 
-
+ss
